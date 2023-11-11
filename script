@@ -1,0 +1,76 @@
+#!/bin/bash
+
+
+play_random_song(){
+	if ! pgrep -x "firefox" > /dev/null
+	then
+		echo "running"
+	fi
+	list=($@)
+	size=${#list[@]}
+	index=$(($RANDOM % $size))
+	song=${list[$index]}
+	firefox $song
+}
+
+sad_song_list=(
+	'https://www.youtube.com/watch?v=vLLIRQiZCd0'
+	'https://www.youtube.com/watch?v=Jy-dLvnJaw8&t=146s'
+	'https://www.youtube.com/watch?v=oYtqLc9fn2g&t=1734s'
+	'https://www.youtube.com/watch?v=nxMH612Sd8c'
+	'https://www.youtube.com/watch?v=XM0hh8OFO4M'
+	)
+love_song_list=(
+	'https://www.youtube.com/watch?v=XM0hh8OFO4M'
+	'https://www.youtube.com/watch?v=C2MoOX8Rp7I'
+	'https://www.youtube.com/watch?v=prrEnm_sBVM'
+	'https://www.youtube.com/watch?v=dTQxJPZAGxo'
+	'https://www.youtube.com/watch?v=GLpkhSbd2rM'
+	)
+
+relax_song_list=(
+	'https://www.youtube.com/watch?v=ANkxRGvl1VY'
+	'https://www.youtube.com/watch?v=prrEnm_sBVM'
+	'https://www.youtube.com/watch?v=UUlyopAVKak'
+	'https://www.youtube.com/watch?v=XjK_-rDN7bQ'
+	)
+
+villian_song_list=(
+	'https://www.youtube.com/watch?v=YPjFCHMH880'
+	'https://www.youtube.com/watch?v=gROpSVPMMoo'
+	'https://www.youtube.com/watch?v=nOvkRfIVfIc'
+)
+echo "how Are you legend?"
+echo "1-happy\n2-sad\n3-neutral\n4-tired\n5-work"
+
+while true;do
+	read -r n_mood
+	case $n_mood in
+	'1') 
+		play_random_song ${villian_song_list[@]} ${love_song_list[@]}
+		exit
+	;;
+	'2')
+		play_random_song ${sad_song_list[@]} ${relax_song_list[@]}
+		exit
+	;;
+	'3')
+		play_random_song ${relax_song_list[@]} ${love_song_list[@]}
+		exit
+	;;
+	'4')
+		play_random_song ${relax_song_list[@]}
+		exit
+	;;
+	'5')
+		play_random_song ${relax_song_list[@]} ${villian_song_list[@]}
+		firefox "www.github.com"
+		firefox "https://intranet.alxswe.com/"
+		exit
+	;;
+	*)
+	       	echo "error in choice"
+	;;
+	esac
+done
+
