@@ -2,10 +2,6 @@
 
 
 play_random_song(){
-	if ! pgrep -x "firefox" > /dev/null
-	then
-		echo "running"
-	fi
 	list=($@)
 	size=${#list[@]}
 	index=$(($RANDOM % $size))
@@ -40,6 +36,13 @@ villian_song_list=(
 	'https://www.youtube.com/watch?v=gROpSVPMMoo'
 	'https://www.youtube.com/watch?v=nOvkRfIVfIc'
 )
+
+check=`ps -e | grep "firefox"`
+
+if [[ -z $check ]]
+then
+	firefox &
+fi
 echo "how Are you legend?"
 echo "1-happy\n2-sad\n3-neutral\n4-tired\n5-work"
 
